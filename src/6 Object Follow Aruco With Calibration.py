@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 """This script shows an example of using the PyWavefront module."""
 import ctypes
-import os
 import sys
 sys.path.append('..')
 import pyglet
@@ -13,9 +12,14 @@ import cv2
 import cv2.aruco as aruco
 import glob
 
-cap = cv2.VideoCapture(0)
+# resource path
+import os
+path = os.path.abspath('..')
+res = path + '/res'
 
 def calibrate():
+    cap = cv2.VideoCapture(0)
+
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 
     # prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
@@ -60,14 +64,14 @@ def calibrate():
     #create a file to store data
     from lxml import etree
     from lxml.builder import E
-    fname = "Samples/calibration_parameters.txt"
+    global fname
     with open(fname, "w") as f:
         f.write("{'ret':"+str(ret)+", 'mtx':"+str(list(mtx))+', "dist":'+str(list(dist))+'}')
         f.close()
 
     
 #test wheater already calibrated or not
-fname = "Samples/calibration_parameters.txt"
+fname = res + "/calibration_parameters.txt"
 try:
     f = open(fname, "r")
     f.read()
@@ -91,7 +95,7 @@ mtx = array(parameters['mtx'])
 dist = array(parameters['dist'])
 
 # Create absolute path from this module
-file_abspath = os.path.join(os.path.dirname(__file__), 'Samples/box.obj')
+file_abspath = os.path.join(os.path.dirname(__file__), res + '/box.obj')
 
 red = green = blue = 0
 meshes = pywavefront.Wavefront(file_abspath)

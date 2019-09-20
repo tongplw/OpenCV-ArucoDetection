@@ -12,6 +12,9 @@ import numpy as np
 import cv2
 import cv2.aruco as aruco
 
+# resource path
+path = os.path.abspath('..')
+res = path + '/res'
 
 cap = cv2.VideoCapture(0)
 
@@ -56,7 +59,7 @@ def draw(img, corners, imgpts):
     return img
 
 # Create absolute path from this module
-file_abspath = os.path.join(os.path.dirname(__file__), 'Samples/box.obj')
+file_abspath = os.path.join(os.path.dirname(__file__), res + '/box.obj')
 
 rotation1 = rotation2 = rotation3 = 0
 meshes = pywavefront.Wavefront(file_abspath)

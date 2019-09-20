@@ -2,6 +2,10 @@ import numpy as np
 import cv2
 import cv2.aruco as aruco
 
+# resource path
+import os
+path = os.path.abspath('..')
+res = path + '/res'
 
 cap = cv2.VideoCapture(0)
 
@@ -25,7 +29,7 @@ while(True):
         #x4 = ((x1[0]+x4[0])/2, (x1[1]+x4[1])/2)
         
         im_dst = frame 
-        im_src = cv2.imread("Samples/pic.png")
+        im_src = cv2.imread(res + "/pic.png")
         size = im_src.shape
         pts_dst = np.array([x1,x2,x3,x4])
         pts_src = np.array(
